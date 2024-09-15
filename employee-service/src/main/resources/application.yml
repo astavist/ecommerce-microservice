@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: employee-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/employeeDB
+    username: postgres
+    password: postgres
+  jpa:
+    hibernate:
+      ddl-auto: create
