@@ -8,6 +8,7 @@ import org.astavist.payment_service.business.dto.responses.CreatePaymentResponse
 import org.astavist.payment_service.business.dto.responses.GetAllPaymentsResponse;
 import org.astavist.payment_service.business.dto.responses.GetPaymentResponse;
 import org.astavist.payment_service.business.dto.responses.UpdatePaymentResponse;
+import org.astavist.payment_service.business.producer.RabbitMQProducer;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 

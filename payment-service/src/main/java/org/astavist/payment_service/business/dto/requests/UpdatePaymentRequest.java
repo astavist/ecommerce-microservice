@@ -13,6 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class UpdatePaymentRequest {
     private UUID id;
+    private UUID employeem;
     private String month;
     private int cost;
 }

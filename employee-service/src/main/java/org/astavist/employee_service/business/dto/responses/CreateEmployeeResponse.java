@@ -15,4 +15,5 @@ public class CreateEmployeeResponse {
     private UUID id;
     private String name;
     private int salary;
+    private boolean Paid;
 }

@@ -12,6 +12,7 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CreatePaymentRequest {
+    private UUID employeem;
     private String month;
     private int cost;
 }

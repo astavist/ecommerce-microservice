@@ -14,4 +14,5 @@ import java.util.UUID;
 public class CreateEmployeeRequest {
     private String name;
     private int salary;
+    private boolean Paid;
 }

@@ -8,6 +8,18 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+    publisher-returns: true
+    queue: myQueue
+    mandatory: true
+    deprecated_features:
+      permit:
+        management_metrics_collection: true
 eureka:
   client:
     fetch-registry: true
@@ -18,5 +30,7 @@ eureka:
       instance-id: ${spring.application.name}:${random.value}
       prefer-ip-address: true
 
+
+
 server:
-  port: 0
+  port: 8081

@@ -31,6 +31,7 @@ public class EmployeeManager implements EmployeeService {
             response1.setName(employee.getName());
             response1.setId(employee.getId());
             response1.setSalary(employee.getSalary());
+            response1.setPaid(employee.isPaid());
             response.add(response1);
         }
         return response;
@@ -43,6 +44,7 @@ public class EmployeeManager implements EmployeeService {
         response.setId(employee.getId());
         response.setSalary(employee.getSalary());
         response.setName(employee.getName());
+        response.setPaid(employee.isPaid());
         return response;
     }
 
@@ -51,6 +53,7 @@ public class EmployeeManager implements EmployeeService {
         var employee = new Employee();
         employee.setName(request.getName());
         employee.setSalary(request.getSalary());
+        employee.setPaid(request.isPaid());
         employee.setId(UUID.randomUUID());
         repository.save(employee);
 
@@ -58,6 +61,7 @@ public class EmployeeManager implements EmployeeService {
         response.setId(employee.getId());
         response.setName(employee.getName());
         response.setSalary(employee.getSalary());
+        response.setPaid(employee.isPaid());
 
         return response;
 
@@ -69,12 +73,14 @@ public class EmployeeManager implements EmployeeService {
         employee2.setName(request.getName());
         employee2.setSalary(request.getSalary());
         employee2.setId(id);
+        employee2.setPaid(request.isPaid());
         repository.save(employee2);
 
         UpdateEmployeeResponse response = new UpdateEmployeeResponse();
         response.setId(employee2.getId());
         response.setName(employee2.getName());
         response.setSalary(employee2.getSalary());
+        response.setPaid(response.isPaid());
 
         return response;
     }

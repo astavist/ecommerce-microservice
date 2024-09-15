@@ -8,6 +8,7 @@ import org.astavist.payment_service.business.dto.responses.CreatePaymentResponse
 import org.astavist.payment_service.business.dto.responses.GetAllPaymentsResponse;
 import org.astavist.payment_service.business.dto.responses.GetPaymentResponse;
 import org.astavist.payment_service.business.dto.responses.UpdatePaymentResponse;
+import org.astavist.payment_service.business.producer.RabbitMQProducer;
 import org.astavist.payment_service.entity.Payment;
 import org.astavist.payment_service.repository.PaymentRepository;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class PaymentManager implements PaymentService {
     private final PaymentRepository repository;
+    private final RabbitMQProducer producer;
     @Override
     public List<GetAllPaymentsResponse> getAll() {
         List<Payment> payments = repository.findAll();
@@ -46,16 +48,22 @@ public class PaymentManager implements PaymentService {
 
     @Override
     public CreatePaymentResponse add(CreatePaymentRequest request) {
-        var payment = new Payment();
-        payment.setCost(request.getCost());
-        payment.setMonth(request.getMonth());
-        payment.setId(UUID.randomUUID());
-        repository.save(payment);
 
         CreatePaymentResponse response = new CreatePaymentResponse();
+        Payment payment = new Payment();
+        payment.setEmployeem(request.getEmployeem());
+        payment.setMonth(request.getMonth());
+        payment.setCost(request.getCost());
+        payment.setId(UUID.randomUUID());
+
+        repository.save(payment);
+
         response.setId(payment.getId());
         response.setCost(payment.getCost());
         response.setMonth(payment.getMonth());
+        response.setEmployeem(payment.getEmployeem());
+
+        processPayment(payment.getEmployeem());
 
         return response;
     }
@@ -74,6 +82,11 @@ public class PaymentManager implements PaymentService {
         response.setMonth(payment2.getMonth());
 
         return response;
+    }
+
+
+    public void processPayment(UUID employeeId) {
+        producer.sendMessage(employeeId);
     }
 
     @Override

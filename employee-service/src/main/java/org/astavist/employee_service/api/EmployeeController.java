@@ -2,6 +2,7 @@ package org.astavist.employee_service.api;
 
 import lombok.AllArgsConstructor;
 import org.astavist.employee_service.business.abstracts.EmployeeService;
+import org.astavist.employee_service.business.consumer.RabbitMQConsumer;
 import org.astavist.employee_service.business.dto.requests.CreateEmployeeRequest;
 import org.astavist.employee_service.business.dto.requests.UpdateEmployeeRequest;
 import org.astavist.employee_service.business.dto.responses.CreateEmployeeResponse;
@@ -40,6 +41,7 @@ public class EmployeeController {
     public UpdateEmployeeResponse update(@PathVariable UUID id, @RequestBody UpdateEmployeeRequest request) {
         return service.update(id, request);
     }
+
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
