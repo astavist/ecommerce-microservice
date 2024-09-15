@@ -9,6 +9,18 @@ services:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_DB=employeeDB
+  paymentDB:
+    container_name: paymentDB
+    image: mysql
+    ports:
+      - "3307:3307"
+    environment:
+      - MYSQL_TCP_PORT=3307
+      - VIRTUAL_PORT=3307
+      - MYSQL_ROOT_PASSWORD=12345
+    volumes:
+      - paymentDB:/data/db/paymentDB
 
 volumes:
   employeeDB:
+  paymentDB:
